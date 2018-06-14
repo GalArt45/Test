@@ -1,0 +1,12 @@
+---
+  - name: delete container maven
+    command: "docker stop maven && docker rm maven"
+    ignore_errors: yes
+
+  - name: build app
+    block:
+      - command: "docker maven -v {{ PATH_SOURCE_CODE }}"
+        args:
+          chdir: "{{ PATH_SOURCE_CODE }}"
+        register: rMaven
+       

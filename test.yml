@@ -1,0 +1,11 @@
+---
+- hosts: 'centos'
+  roles:
+  - {role: build_app, tags:['build_app']}
+  - {role: deploy_app, tags:['deploy_app']}
+
+- hosts: 'centos'
+  tasks:
+    - name: debug test - hostvars
+      debug: var=hostvars[inventory_hostname]
+      tags: ["debug"]
