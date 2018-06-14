@@ -9,4 +9,24 @@
         args:
           chdir: "{{ PATH_SOURCE_CODE }}"
         register: rMaven
-       
+
+      - file:
+          path: "/patch/{{ SP_VERSION }}"
+          state: directory
+          mode: 0755
+
+      - command:  "cp -R {{ PATH_SOURCE_CODE }}/target/* /patch/{{ SP_VERSION }}"
+        args:
+          chdir: "{{ PATH_SOURCE_CODE }}"
+    rescue:
+      - debug: msg="Error build maven!"
+      - name: Putfile Error
+        blockinfile:
+          create: yes
+          path: error.log
+          insertafter: EOF
+          marker: ----------------------------------------------
+          block: |
+           Error build maven. Код возврата: {{ rMaven.rc }}
+           stdout_lines: {{ rMaven.stdout_lines }}
+           stderr_lines: {{ rMaven.stderr_lines }}
