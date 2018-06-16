@@ -1,5 +1,6 @@
 try{
     currentBuild.result="SUCCESS"
+    stage "Prepare"
     node ("master"){
         cleanWs()
         GitPath="/*"
@@ -14,9 +15,7 @@ try{
         unstash name: 'git'
         sh "ls -la"
         withCredentials([usernamePassword(credentialsId: 'vault', passwordVariable: 'VAULT_PASS', usernameVariable: 'user')]) {
- //           sh 'chmod +x print_vault.sh'
-            echo "LS=${VAULT_PASS}"
-            println "Замена конфигов."
+    stage "Build App"
             ansiblePlaybook (
                 colorized: true,
                 playbook: 'test.yml',
