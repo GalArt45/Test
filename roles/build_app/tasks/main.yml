@@ -2,7 +2,6 @@
   - name: st0p container maven
     command: "docker stop maven"
     ignore_errors: yes
-    ansible_become: yes
 
   - name: delete container maven
     command: "docker rm maven"
