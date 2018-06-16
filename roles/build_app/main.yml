@@ -1,11 +1,15 @@
 ---
+  - name: st0p container maven
+    command: "docker stop maven"
+    ignore_errors: yes
+
   - name: delete container maven
-    command: "docker stop maven && docker rm maven"
+    command: "docker rm maven"
     ignore_errors: yes
 
   - name: build app
     block:
-      - command: "docker maven -v {{ PATH_SOURCE_CODE }}"
+      - command: "docker run -v '$(pwd)':{{ PATH_SOURCE_CODE }} -w {{ PATH_SOURCE_CODE }} --name=maven -e DB_HOST -e DB_PORT -e DB_NAME -e DB_USERNAME -e DB_PASSWORD  maven:3.5.3-jdk-8-alpine mvn clean install"
         args:
           chdir: "{{ PATH_SOURCE_CODE }}"
         register: rMaven
