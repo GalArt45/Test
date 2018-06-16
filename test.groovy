@@ -21,7 +21,7 @@ try{
                 playbook: 'test.yml',
                 inventory: 'hosts/hosts',
                 extras: '--vault-password-file=/home/GalArt/vault',
-                tags: 'build_app',
+                tags: 'build_app,debug',
                 extraVars: [
                     SP_VERSION: currentBuild.number
                 ]
