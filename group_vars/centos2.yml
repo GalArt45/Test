@@ -1,5 +1,5 @@
-ansible_ssh_user: 'root'
-ansible_ssh_pass: 'ufkmdfNhjy90'
+ansible_ssh_user: 'GalArt'
+ansible_ssh_pass: 'ufkJktu*45'
 ansible_user: root
 ansible_become: yes
 ansible_become_pass: !vault |
