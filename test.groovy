@@ -1,12 +1,17 @@
 try{
     currentBuild.result="SUCCESS"
-
-    node("centos") {
+    node ("master"){
         cleanWs()
         GitPath="/*"
         GitURL="https://github.com/GalArt45/Test"
         GitBranch="*/master"
         checkout([$class: 'GitSCM', branches: [[name: GitBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GalArt45', url: GitURL]]])
+        stash excludes: '*.groovy', name: 'git'
+        cleanWs()
+    }
+    node("centos") {
+        cleanWs()
+        unstash name: 'git'
         sh "ls -la"
         withCredentials([usernamePassword(credentialsId: 'vault', passwordVariable: 'VAULT_PASS', usernameVariable: 'user')]) {
             sh 'chmod +x print_vault.sh'
