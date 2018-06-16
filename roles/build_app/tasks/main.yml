@@ -18,7 +18,8 @@
           path: "/patch/{{ SP_VERSION }}"
           state: directory
           mode: 0755
-
+-     - pause:
+          minutes: 2
       - command:  "cp -R {{ PATH_SOURCE_CODE }}/target/* /patch/{{ SP_VERSION }}"
         args:
           chdir: "{{ PATH_SOURCE_CODE }}"
