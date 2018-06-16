@@ -1,4 +1,6 @@
 try{
+    currentBuild.result="SUCCESS"
+
     node("centos") {
         cleanWs()
         GitPath="/*"
@@ -26,6 +28,7 @@ try{
 }
 catch(err){
     println err
+    currentBuild.result="FAILURE"
 }
 finally {
     println 'finish '+currentBuild.result
