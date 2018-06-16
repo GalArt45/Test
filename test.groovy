@@ -26,7 +26,7 @@ try{
 }
 catch(err){
     println err
-};
+}
 finally {
     println 'finish '+currentBuild.result
 }
