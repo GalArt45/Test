@@ -29,7 +29,7 @@
       - name: Putfile Error
         blockinfile:
           create: yes
-          path: error.log
+          path: /opt/jenkins/error.log
           insertafter: EOF
           marker: ----------------------------------------------
           block: |
