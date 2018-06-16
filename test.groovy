@@ -14,7 +14,7 @@ try{
         unstash name: 'git'
         sh "ls -la"
         withCredentials([usernamePassword(credentialsId: 'vault', passwordVariable: 'VAULT_PASS', usernameVariable: 'user')]) {
-            sh 'chmod +x print_vault.sh'
+            sh 'chmod 777 print_vault.sh'
             echo "LS=${VAULT_PASS}"
             println "Замена конфигов."
             ansiblePlaybook (
