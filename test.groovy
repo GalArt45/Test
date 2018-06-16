@@ -21,7 +21,7 @@ try{
                 colorized: true,
                 playbook: 'test.yml',
                 inventory: 'hosts/hosts',
-                extras: '--vault-password-file=print_vault.sh',
+                extras: '--vault-password-file=/home/GalArt/vault',
                 tags: 'debug',
                 extraVars: [
                     SP_VERSION: currentBuild.number
