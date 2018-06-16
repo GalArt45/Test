@@ -1,8 +1,9 @@
 ansible_ssh_user: 'GalArt'
 ansible_ssh_pass: 'ufkJktu*45'
-ansible_user: root
+become_user: root
 ansible_become: yes
-ansible_become_pass: 'ufkmdfNhjy90'
+become_method: su
+ansible_become_pass: ufkmdfNhjy90
 PATH_SOURCE_CODE: '/root/project2'
 DB_HOST: 'db'
 DB_PORT: '5432'
