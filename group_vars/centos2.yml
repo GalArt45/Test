@@ -16,7 +16,7 @@ ansible_become_pass: !vault |
                       3136653539636165370a646466343564613531653832353136623235386639333930653032386263
                       3038
 PATH_SOURCE_CODE: '/CB/project2'
-pwd: '$(pwd)'
+ANSIBLE_DEBUG: 1
 DB_HOST: 'db'
 DB_PORT: '5432'
 DB_NAME: 'postgres'
