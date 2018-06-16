@@ -13,6 +13,8 @@
         args:
           chdir: "{{ PATH_SOURCE_CODE }}"
         register: rMaven
+        become: yes
+        become_user: root
 
       - file:
           path: "/patch/{{ SP_VERSION }}"
