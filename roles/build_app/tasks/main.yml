@@ -18,7 +18,7 @@
         when: rMaven.stdout.find('BUILD SUCCESS') != -1
       - fail:
           msg: "Сборка не закончилась удачно: {{ rMaven.rc }} "
-        when: rMaven.stdout.find('BUILD SUCCESS22') == -1
+        when: rMaven.stdout.find('BUILD SUCCESS') == -1
       - file:
           path: "/patch/{{ SP_VERSION }}"
           state: directory
