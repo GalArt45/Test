@@ -1,8 +1,5 @@
 [local]
 localhost
 
-[CENTOS]
-10.88.45.2
-
 [centos2]
 10.88.45.2
