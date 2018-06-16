@@ -17,7 +17,7 @@
       - debug: msg="rMaven contains the word 'BUILD SUCCESS'"
         when: rMaven.stdout.find('BUILD SUCCESS') != -1
       - fail:
-          msg: "Сборка не закончилась удачно."
+          msg: "Сборка не закончилась удачно: {{ rMaven.rc }} "
         when: rMaven.stdout.find('BUILD SUCCESS22') == -1
       - file:
           path: "/patch/{{ SP_VERSION }}"
@@ -29,15 +29,15 @@
   #    - command:  "cp -R {{ PATH_SOURCE_CODE }}/target/* /patch/{{ SP_VERSION }}"
    #     args:
     #      chdir: "{{ PATH_SOURCE_CODE }}"
-    rescue:
-      - debug: msg="Error build maven!"
-      - name: Putfile Error
-        blockinfile:
-          create: yes
-          path: /opt/jenkins/error.log
-          insertafter: EOF
-          marker: ----------------------------------------------
-          block: |
-           Error build maven. Код возврата: {{ rMaven.rc }}
-           stdout_lines: {{ rMaven.stdout_lines }}
-           stderr_lines: {{ rMaven.stderr_lines }}
+ #   rescue:
+  #    - debug: msg="Error build maven!"
+  #    - name: Putfile Error
+  #      blockinfile:
+  #        create: yes
+  #        path: /opt/jenkins/error.log
+  #        insertafter: EOF
+  #        marker: ----------------------------------------------
+  #        block: |
+  #         Error build maven. Код возврата: {{ rMaven.rc }}
+   #        stdout_lines: {{ rMaven.stdout_lines }}
+   #        stderr_lines: {{ rMaven.stderr_lines }}
