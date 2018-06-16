@@ -13,14 +13,17 @@
         args:
           chdir: "{{ PATH_SOURCE_CODE }}"
         register: rMaven
-      - debug: var=rMaven.stdout_lines
+  #    - debug: var=rMaven.stdout_lines
       - file:
           path: "/patch/{{ SP_VERSION }}"
           state: directory
           mode: 0755
-      - command:  "cp -R {{ PATH_SOURCE_CODE }}/target/* /patch/{{ SP_VERSION }}"
-        args:
-          chdir: "{{ PATH_SOURCE_CODE }}"
+      - copy:
+          src: "{{ PATH_SOURCE_CODE }}/target"
+          dest: "/patch/{{ SP_VERSION }}"
+  #    - command:  "cp -R {{ PATH_SOURCE_CODE }}/target/* /patch/{{ SP_VERSION }}"
+   #     args:
+    #      chdir: "{{ PATH_SOURCE_CODE }}"
     rescue:
       - debug: msg="Error build maven!"
       - name: Putfile Error
