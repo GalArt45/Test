@@ -9,7 +9,7 @@
 
   - name: build app
     block:
-      - command: "docker run -v \"{{ pwd }}\":{{ PATH_SOURCE_CODE }} -w {{ PATH_SOURCE_CODE }} --name=maven -e DB_HOST -e DB_PORT -e DB_NAME -e DB_USERNAME -e DB_PASSWORD  maven:3.5.3-jdk-8-alpine mvn clean install"
+      - command: docker run -v "\$(pwd)":{{ PATH_SOURCE_CODE }} -w {{ PATH_SOURCE_CODE }} --name=maven -e DB_HOST -e DB_PORT -e DB_NAME -e DB_USERNAME -e DB_PASSWORD  maven:3.5.3-jdk-8-alpine mvn clean install
         args:
           chdir: "{{ PATH_SOURCE_CODE }}"
         register: rMaven
