@@ -1,6 +1,5 @@
 ---
 - hosts: 'centos2'
-  become: true
   roles:
   - {role: build_app, tags: ['build_app']}
 #  - {role: deploy_app, tags: ['deploy_app']}
