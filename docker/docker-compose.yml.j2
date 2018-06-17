@@ -14,11 +14,12 @@ services:
 
   tomcat:
     image: tomcat:9-jre8-slim
+    container_name: tomcat
     restart: always
     volumes:
       - /tomcat/logs:/usr/local/tomcat/logs
-      - /root/project/target/abscence-control.war:/usr/local/tomcat/webapps/absence-control.war
-      - /root/project/target/absence-control:/usr/local/tomcat/webapps/absence-control
+      - "/patch/{{ SP_VERSION }}/target/abscence-control.war:/usr/local/tomcat/webapps/absence-control.war"
+      - "/patch/{{ SP_VERSION }}/target/absence-control:/usr/local/tomcat/webapps/absence-control"
     ports:
       - 8085:8080
     links:
