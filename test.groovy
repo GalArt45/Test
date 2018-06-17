@@ -43,7 +43,7 @@ try{
         SmokeDoc(postgresql)
         SmokeDoc(tomcat)
 
-//        cleanWs()
+        cleanWs()
     }
 }
 catch(err){
@@ -53,9 +53,7 @@ catch(err){
 finally {
     println 'finish '+currentBuild.result
 }
-node ('centos') {
-    println SmokeDoc('tomcat')
-}
+
 def SmokeDoc(container_name){
     String result = ""
     try {
