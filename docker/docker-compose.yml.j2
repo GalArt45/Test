@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+{% if DB_REDEPLOY] %}
+  postgresql:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD:{{ DB_PASSWORD }}
+    container_name: postgresql
+{% endif %}
+  tomcat:
+    image: tomcat:9-jre8-slim
+    restart: always
+    volumes:
+      - /tomcat/logs:/usr/local/tomcat/logs
+      - /root/project/target/abscence-control.war:/usr/local/tomcat/webapps/absence-control.war
+      - /root/project/target/absence-control:/usr/local/tomcat/webapps/absence-control
+    ports:
+      - 8085:8080
+    links:
+      - postgresql:db

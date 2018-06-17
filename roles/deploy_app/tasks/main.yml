@@ -1,0 +1,13 @@
+---
+#  - name: st0p container tomcat
+#    command: "docker stop tomcat"
+#    ignore_errors: yes
+
+#  - name: remove container tomcat
+#    command: "docker rm tomcat"
+#    ignore_errors: yes
+
+  - name: Template docker-compose
+    template:
+      src: docker/docker-compose.yml.j2
+      dest: docker-compose.yml
