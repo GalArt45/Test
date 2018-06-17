@@ -40,8 +40,8 @@ try{
             )
         }
         stage "Smoke"
-        SmokeDoc(postgresql)
-        SmokeDoc(tomcat)
+        SmokeDoc('postgresql')
+        SmokeDoc('tomcat')
 
         cleanWs()
     }
