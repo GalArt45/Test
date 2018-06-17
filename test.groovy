@@ -21,7 +21,7 @@ try{
                     playbook: 'test.yml',
                     inventory: 'hosts/hosts',
                     extras: '--vault-password-file=/home/GalArt/vault',
-                    tags: 'build_app,debug',
+                    tags: 'build_app',
                     extraVars: [
                             SP_VERSION : currentBuild.number
                     ]
@@ -32,7 +32,7 @@ try{
                     playbook: 'test.yml',
                     inventory: 'hosts/hosts',
                     extras: '--vault-password-file=/home/GalArt/vault',
-                    tags: 'deploy_app,debug',
+                    tags: 'deploy_app',
                     extraVars: [
                             SP_VERSION : currentBuild.number,
                             DB_REDEPLOY: DB_REDEPLOY
