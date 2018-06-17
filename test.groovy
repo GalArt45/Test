@@ -1,12 +1,12 @@
-try{
+/*try{
     currentBuild.result="SUCCESS"
     stage "Prepare"
     node ("master"){
         cleanWs()
         GitPath="/*"
-        GitURL="https://github.com/GalArt45/Test"
-        GitBranch="*/master"
-        checkout([$class: 'GitSCM', branches: [[name: GitBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GalArt45', url: GitURL]]])
+        GitURL="https://github.com/GalArt45/Test"*/
+//        GitBranch="*/master"
+/*        checkout([$class: 'GitSCM', branches: [[name: GitBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GalArt45', url: GitURL]]])
         stash excludes: '*.groovy', name: 'git'
         cleanWs()
     }
@@ -49,4 +49,27 @@ catch(err){
 }
 finally {
     println 'finish '+currentBuild.result
+}*/
+node ('centos') {
+    println SmokeDoc('tomcat')
+}
+def SmokeDoc(container_name){
+    String result = ""
+    try {
+        result = sh returnStdout: true, script: "docker ps -f name=${container_name} --format \"{{.ID}}\\t{{.Status}}\" -f status=running"
+    }
+    catch (err){
+        println "Ошибка при проверке статуса контейнера ${container_name}"
+        result = -1
+        return result
+    }
+
+    if (result==~/[\s\S]*Up([\s\S]*?)$/){
+        println "Контейнер ${container_name} запущен."
+    }
+    else{
+        println "Контейнер ${container_name} не запущен!!!"
+        currentBuild.result="FAILURE"
+    }
+    return result
 }
