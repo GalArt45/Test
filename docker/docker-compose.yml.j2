@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-{% if DB_REDEPLOY %}
+{% if DB_REDEPLOY==true %}
   postgresql:
     image: postgres
     restart: always
