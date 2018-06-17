@@ -1,13 +1,27 @@
 ---
-#  - name: st0p container tomcat
-#    command: "docker stop tomcat"
-#    ignore_errors: yes
+  - name: st0p container tomcat
+    command: "docker stop tomcat"
+    ignore_errors: yes
 
-#  - name: remove container tomcat
-#    command: "docker rm tomcat"
-#    ignore_errors: yes
+  - name: remove container tomcat
+    command: "docker rm tomcat"
+    ignore_errors: yes
 
   - name: Template docker-compose
     template:
       src: "docker/docker-compose.yml.j2"
       dest: "{{ playbook_dir }}/docker-compose.yml"
+
+  - name: stop container postgre
+    command: "docker stop postgresql"
+    ignore_errors: yes
+    when: DB_REDEPLOY=='true'
+
+  - name: remove container postgre
+    command: "docker rm postgresql"
+    ignore_errors: yes
+    when: DB_REDEPLOY=='true'
+
+  - name: create docker
+    command: "docker-compose up --build -d"
+
