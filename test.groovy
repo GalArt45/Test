@@ -15,19 +15,32 @@ try{
         unstash name: 'git'
         sh "ls -la"
         withCredentials([usernamePassword(credentialsId: 'vault', passwordVariable: 'VAULT_PASS', usernameVariable: 'user')]) {
-    stage "Build App"
-            ansiblePlaybook (
-                colorized: true,
-                playbook: 'test.yml',
-                inventory: 'hosts/hosts',
-                extras: '--vault-password-file=/home/GalArt/vault',
-                tags: 'build_app,debug',
-                extraVars: [
-                    SP_VERSION: currentBuild.number
-                ]
+            stage "Build App"
+ /*           ansiblePlaybook(
+                    colorized: true,
+                    playbook: 'test.yml',
+                    inventory: 'hosts/hosts',
+                    extras: '--vault-password-file=/home/GalArt/vault',
+                    tags: 'build_app,debug',
+                    extraVars: [
+                            SP_VERSION : currentBuild.number
+                    ]
+            )*/
+            stage "Deploy App"
+            ansiblePlaybook(
+                    colorized: true,
+                    playbook: 'test.yml',
+                    inventory: 'hosts/hosts',
+                    extras: '--vault-password-file=/home/GalArt/vault',
+                    tags: 'deploy_app,debug',
+                    extraVars: [
+                            SP_VERSION : currentBuild.number,
+                            DB_REDEPLOY: DB_REDEPLOY
+                    ]
             )
         }
-        cleanWs()
+
+//        cleanWs()
     }
 }
 catch(err){
