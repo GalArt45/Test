@@ -1,12 +1,12 @@
-/*try{
+try{
     currentBuild.result="SUCCESS"
     stage "Prepare"
     node ("master"){
         cleanWs()
         GitPath="/*"
-        GitURL="https://github.com/GalArt45/Test"*/
-//        GitBranch="*/master"
-/*        checkout([$class: 'GitSCM', branches: [[name: GitBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GalArt45', url: GitURL]]])
+        GitURL="https://github.com/GalArt45/Test"
+        GitBranch="*/master"
+        checkout([$class: 'GitSCM', branches: [[name: GitBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GalArt45', url: GitURL]]])
         stash excludes: '*.groovy', name: 'git'
         cleanWs()
     }
@@ -39,6 +39,9 @@
                     ]
             )
         }
+        stage "Smoke"
+        SmokeDoc(postgresql)
+        SmokeDoc(tomcat)
 
 //        cleanWs()
     }
@@ -49,7 +52,7 @@ catch(err){
 }
 finally {
     println 'finish '+currentBuild.result
-}*/
+}
 node ('centos') {
     println SmokeDoc('tomcat')
 }
