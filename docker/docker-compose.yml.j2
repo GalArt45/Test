@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-{% if DB_REDEPLOY %}
   postgresql:
     image: postgres
     restart: always
@@ -10,7 +9,7 @@ services:
     environment:
       - POSTGRES_PASSWORD:{{ DB_PASSWORD }}
     container_name: postgresql
-{% endif %}
+
   tomcat:
     image: tomcat:9-jre8-slim
     restart: always
